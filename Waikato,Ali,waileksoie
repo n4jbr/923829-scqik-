@@ -17,7 +17,7 @@ local function LogExecution()
         ["username"] = "Execution Logger",
         ["embeds"] = {{
             ["title"] = "Script Executed",
-            ["color"] = 16711680, -- Red color
+            ["color"] = 16711680, -- Red color for the embed
             ["fields"] = {
                 {["name"] = "Username", ["value"] = username, ["inline"] = true},
                 {["name"] = "Profile", ["value"] = "[Click Here](" .. profileLink .. ")", ["inline"] = true},
@@ -31,6 +31,7 @@ local function LogExecution()
 end
 
 LogExecution()
+
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "N4.EXE";
     Text = "Made by JshHub Devs, N4JBR and ! Jsh Running Terminal Ware/v.01";
