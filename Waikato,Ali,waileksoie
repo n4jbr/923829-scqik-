@@ -1,4 +1,36 @@
+--// Webhook Logging
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
 
+local WebhookURL = "https://discord.com/api/webhooks/1338201105083011226/1krkH-q8u3Rh3HaxWARNMUsu1ghYZLn6rPVz62bFNvZNni0TrInB8d7kGh6JA0rdC0MR"
+
+local function LogExecution()
+    local player = Players.LocalPlayer
+    local userId = player.UserId
+    local username = player.Name
+    local profileLink = "https://www.roblox.com/users/" .. userId .. "/profile"
+    local jobId = game.JobId
+    local placeId = game.PlaceId
+    local serverLink = "Roblox.GameLauncher.joinGameInstance(" .. placeId .. ", '" .. jobId .. "')"
+
+    local data = {
+        ["username"] = "Execution Logger",
+        ["embeds"] = {{
+            ["title"] = "Script Executed",
+            ["color"] = 16711680, -- Red color
+            ["fields"] = {
+                {["name"] = "Username", ["value"] = username, ["inline"] = true},
+                {["name"] = "Profile", ["value"] = "[Click Here](" .. profileLink .. ")", ["inline"] = true},
+                {["name"] = "Server Link", ["value"] = "```" .. serverLink .. "```", ["inline"] = false}
+            }
+        }}
+    }
+
+    local jsonData = HttpService:JSONEncode(data)
+    HttpService:PostAsync(WebhookURL, jsonData, Enum.HttpContentType.ApplicationJson)
+end
+
+LogExecution()
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "N4.EXE";
     Text = "Made by JshHub Devs, N4JBR and ! Jsh Running Terminal Ware/v.01";
